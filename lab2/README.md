@@ -94,3 +94,47 @@ minikube service lobster-web-service
 ```
 
 ![веб-страница](screenshots/lobster1.png)
+
+
+## Часть 2
+
+
+С помощью команд
+```bash
+helm create lobster-web
+cd lobster-web
+```
+я создал шаблон для helm chart.
+В файл `values.yaml` я изиенил `type` в `service` на NodePort, добавил значение `nodePort`
+Также я добавил в значение `html` содержимое веб-страницы.
+В конце файла содержатся закомментированные `volumes` и `volumeMounts`, я подставил туда свои значения из прошлого `deployment.yaml`.
+
+Ещё я добавил в template файл `configmap.yaml`
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config
+data:
+  index.html: |
+{{ .Values.html | indent 4 }}
+```
+
+Затем я запустил release
+```sh
+helm install lobster-release .
+```
+![lens release](screenshots/lens.png)
+На скриншоте release в IDE Lens. Здесь же можно изменить файл `values.yaml`, сохранить его и обновить release с помощью кнопки upgrade.
+
+Для примера я изменил порт с 30800 на 30801:
+![port](screenshots/port.png)
+
+## А минусы будут?
+
+1. Все измменения можно производить в одном файле `values.yaml`, не трогая остальные файлы
+2. С помощью одной команды (или кнопки в IDE) все изменения применятся к остальным файлам автоматически
+3. Не нужно отдельно прописывать `kubectl apply` для всех манифестов
+4. История версий для легкого отката в случае ошибки
+
+Подводя итог, автоматизация - маст хев!
