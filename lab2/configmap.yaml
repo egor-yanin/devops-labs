@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-content
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>lobster</title>
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+        <style>
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                font-size: 2rem;
+                font-family: 'Lobster', cursive;
+            }
+        </style>
+    </head>
+    <body>
+        Эта веб-страница просто ✨чудесна✨
+    </body>
+    </html>
