@@ -9,6 +9,7 @@
 minio server ~/minio-data --console-address ":9001"
 ```
 API доступен по порту 9000, UI по 9001:
+
 ![WebUI](screenshots/minio-ui.png)
 
 Также автоматически создан minioclient myminio
@@ -70,11 +71,14 @@ def delete_storage(user_id: str):
 ```
 
 Для проверки я использую SwaggerUI:
+
 ![alt text](screenshots/successful.png)
 ![alt text](screenshots/console-bucket.png)
+
 Как видно, хранилище успешно создано
 
 Теперь удалю его
+
 ![alt text](screenshots/deleted.png)
 
 ## Часть 2 - Играем
@@ -88,11 +92,14 @@ def delete_storage(user_id: str):
 Контроллер создает хранилище и куб, а затем ждет, пока он не будет уничтожен. Как только куб уничтожается, он уничтожает и хранилище.
 
 Запускаем контроллер:
+
 ![alt text](screenshots/0505.gif)
 ![alt text](screenshots/bucket-cube-created.png)
 
-Теперь я уничтожу куб:  
-<video controls src="screenshots/0505(1).gif.mp4" title="Title"></video>
+Теперь я уничтожу куб:
+
+![alt text](screenshots/0505(2).gif)
 
 Вместе с ним уничтожается и хранилище:
+
 ![alt text](screenshots/bucket-destroyed.png)
