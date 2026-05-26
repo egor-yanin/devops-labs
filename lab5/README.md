@@ -11,6 +11,7 @@ import random
 import time
 import math
 
+
 app = Flask(__name__)
 
 REQUEST_COUNT = Counter(
@@ -62,7 +63,13 @@ if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
 ```
 
-Он поставляет несколько метрик для Prometheus. Я запустил kube-prometheus-stack и проверил через веб-интерфейс доступность метрик
+Он поставляет несколько метрик для Prometheus. Я запустил kube-prometheus-stack, применил `deployment.yaml`, `service.yaml`, `servicemonitor.yaml` и проверил через веб-интерфейс доступность метрик. Для доступа к внутренним эндпоинтам кластера я пробросил порты: 
+
+```bash
+kubectl port-forward svc/monitoring-kube-prometheus-prometheus 9090:9090
+kubectl port-forward svc/load-service 8080:80
+kubectl port-forward svc/monitoring-grafana 3000:80
+```
 
 ![alt text](screenshots/metrics.png)
 
@@ -75,8 +82,8 @@ if __name__ == "__main__":
 
 Я запустил 
 ```sh
-while true do
-    curl localhost:8080;
+while true; do
+    curl localhost:8080
 done
 ```
 чтобы эмулировать постоянную нагрузку.
