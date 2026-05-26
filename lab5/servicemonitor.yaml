@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+
+metadata:
+  name: load-service-monitor
+
+  labels:
+    release: monitoring
+
+spec:
+  selector:
+    matchLabels:
+      app: load-service
+
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 5s
